@@ -2,16 +2,16 @@
 ### Bearbeiter: Matthias Priehs (ID: 454225)
 ### Thema: Spekulanten und ihr Einfluss auf Rohstoffpreise
 
-## 1. Datensatz laden/anpassen und benötigte Pakete beziehen
+## 1. Datensatz laden/anpassen und benÃ¶tigte Pakete beziehen
 # Pakete laden
-library(tseries) # FÜr ADF Test
-library(lmtest) # FÜr Test auf Autokorrelation
-library(sjPlot) # Für HTML Outputs der Regression
-library(papeR) # FÜr deskriptive Statistiken
+library(tseries) # FÃœr ADF Test
+library(lmtest) # FÃœr Test auf Autokorrelation
+library(sjPlot) # FÃ¼r HTML Outputs der Regression
+library(papeR) # FÃœr deskriptive Statistiken
 library(ggplot2)
 
 # Verzeichnis wechseln
-setwd("H:/Google Drive/Uni/Uni Münster/Module/Seminar Empirische Aspekte von Rohstoffmärkten/R")
+setwd("")
 
 # Datensatz laden
 x <- as.data.frame(read.csv2("data_new.csv"))
@@ -57,7 +57,7 @@ log_r_oil <- diff(log(x$light_crude_oil_fut))
 log_r_usd <- diff(log(x$usd_index))
 
 ## 4. Finalen Datensatz erstellen
-# Auffüllen der Log-Reihen mit 0 als erster Wert, da sonst unterschiedliche Längen der Vektoren
+# AuffÃ¼llen der Log-Reihen mit 0 als erster Wert, da sonst unterschiedliche LÃ¤ngen der Vektoren
 log_r_wheat <- append(log_r_wheat,0,0)
 log_r_corn <- append(log_r_corn,0,0)
 log_r_coff <- append(log_r_coff,0,0)
@@ -66,7 +66,7 @@ log_r_sp500 <- append(log_r_sp500,0,0)
 log_r_oil <- append(log_r_oil,0,0)
 log_r_usd <- append(log_r_usd,0,0)
 
-# Hinzufügen der erstellten Variablen zu Anfangsdatensatz
+# HinzufÃ¼gen der erstellten Variablen zu Anfangsdatensatz
 x <- cbind(x,work_t_w,work_t_corn,work_t_coff,work_t_coc,share_spec_w,share_spec_corn,
            share_spec_coff,share_spec_coc,log_r_wheat,log_r_corn,log_r_coff,log_r_coc,
            log_r_sp500,log_r_oil,log_r_usd)
@@ -78,40 +78,40 @@ sum_indices <- summarize(x, type = "numeric", variables = c("work_t_w","work_t_c
 
 cor_indices <- cor(x[,c(33:40)])
 
-# Übertragung zu Word
+# Ãœbertragung zu Word
 write.table(sum_indices, file = "indices.txt")
 write.table(cor_indices, file = "cor_indices.txt")
 
-## 6. Stationaritätstest
-# Test aller Zeitreihen auf Stationarität
-adf.test(wheat_fut) # nicht-stationär
-adf.test(corn_fut) # nicht-stationär
-adf.test(coffee_fut) # nicht-stationär
-adf.test(cocoa_fut) # nicht-stationär
-adf.test(s.p_500_index) # nicht-stationär
-adf.test(light_crude_oil_fut) # nicht-stationär
-adf.test(usd_index) # nicht stationär
+## 6. StationaritÃ¤tstest
+# Test aller Zeitreihen auf StationaritÃ¤t
+adf.test(wheat_fut) # nicht-stationÃ¤r
+adf.test(corn_fut) # nicht-stationÃ¤r
+adf.test(coffee_fut) # nicht-stationÃ¤r
+adf.test(cocoa_fut) # nicht-stationÃ¤r
+adf.test(s.p_500_index) # nicht-stationÃ¤r
+adf.test(light_crude_oil_fut) # nicht-stationÃ¤r
+adf.test(usd_index) # nicht stationÃ¤r
 
-adf.test(log_r_wheat, k=0) # stationär
-adf.test(log_r_corn, k=0) # stationär
-adf.test(log_r_coff, k=0) # stationär
-adf.test(log_r_coc, k=0) # statonär
-adf.test(log_r_sp500, k=0) # stationär
-adf.test(log_r_oil, k=0) # stationär
-adf.test(log_r_usd, k=0) # stationär
+adf.test(log_r_wheat, k=0) # stationÃ¤r
+adf.test(log_r_corn, k=0) # stationÃ¤r
+adf.test(log_r_coff, k=0) # stationÃ¤r
+adf.test(log_r_coc, k=0) # statonÃ¤r
+adf.test(log_r_sp500, k=0) # stationÃ¤r
+adf.test(log_r_oil, k=0) # stationÃ¤r
+adf.test(log_r_usd, k=0) # stationÃ¤r
 
-adf.test(work_t_w, k=0) # stationär
-adf.test(work_t_corn, k=0) # stationär
-adf.test(work_t_coff, k=0) # stationär
-adf.test(work_t_coc, k=0) # stationär
+adf.test(work_t_w, k=0) # stationÃ¤r
+adf.test(work_t_corn, k=0) # stationÃ¤r
+adf.test(work_t_coff, k=0) # stationÃ¤r
+adf.test(work_t_coc, k=0) # stationÃ¤r
 
-adf.test(share_spec_w, k=0) # stationär
-adf.test(share_spec_corn, k=0) # stationär
-adf.test(share_spec_coff, k=0) # stationär
-adf.test(share_spec_coc, k=0) # stationär
+adf.test(share_spec_w, k=0) # stationÃ¤r
+adf.test(share_spec_corn, k=0) # stationÃ¤r
+adf.test(share_spec_coff, k=0) # stationÃ¤r
+adf.test(share_spec_coc, k=0) # stationÃ¤r
 
-## 7. Modellschätzung
-# Schätzung für Anteil Spekulanten
+## 7. ModellschÃ¤tzung
+# SchÃ¤tzung fÃ¼r Anteil Spekulanten
 ols1 <- lm(log_r_wheat ~ log_r_usd + log_r_sp500 + log_r_oil + share_spec_w)
 ols2 <- lm(log_r_corn ~ log_r_usd + log_r_sp500 + log_r_oil + share_spec_corn)
 ols3 <- lm(log_r_coff ~  + log_r_usd + log_r_sp500 + log_r_oil + share_spec_coff)
@@ -124,7 +124,7 @@ tab_model(ols1,ols2,ols3,ols4, show.ci = FALSE, p.style = "asterisk",
           string.est = "Schaetzer",
           pred.labels = c("(Konstante)","usd_index","s$p500","rohoel","Anteil_Spek_Weizen","Anteil_Spek_Mais","Anteil_Spek_Kaffee","Anteil_Spek_Kakao"))
 
-# Schätzung für Working's T
+# SchÃ¤tzung fÃ¼r Working's T
 ols5 <- lm(log_r_wheat ~ log_r_usd + log_r_sp500 + log_r_oil + work_t_w)
 ols6 <- lm(log_r_corn ~ log_r_usd + log_r_sp500 + log_r_oil + work_t_corn)
 ols7 <- lm(log_r_coff ~  + log_r_usd + log_r_sp500 + log_r_oil + work_t_coff)
